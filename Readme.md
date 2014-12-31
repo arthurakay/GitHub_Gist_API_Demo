@@ -34,3 +34,15 @@ This demo application has only implemented two of the available APIs, though its
 Again, per the Sencha convention, this application requires that it be loaded on a web server.
 
 Viewing the `~/index.html` file will then automatically load the single page Ext JS application. 
+
+## Unit Tests
+
+I tried to go the extra mile and showcase some unit tests against the `GitHub.API` class using Node.js.
+
+You can find these under `~/packages/GitHub/tests/API.js` -- but it needs to be said that using Node.js to test
+a JavaScript framework depending on the browser is a bad idea. The Ext JS framework assumes lots of things about
+a browser environment, while Node.js expects lots of things about a Node environment... and needless to say, these
+expectations don't always match.
+
+I'm using `jsdom` to get the job started, but ultimately you'd be more successful with PhantomJS or Siesta (or some
+other automated test suite running in a browser).

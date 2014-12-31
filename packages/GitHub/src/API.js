@@ -19,6 +19,10 @@ Ext.define('GitHub.API', {
      * @returns {String|*}
      */
     url : function (api, params) {
+        if (!api || !params) {
+            return false;
+        }
+
         var str = Ext.String;
 
         //the first argument to Ext.String.format is the tokenized template
