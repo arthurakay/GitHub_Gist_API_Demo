@@ -15,22 +15,27 @@ Ext.define('Demo.view.detail.Controller', {
     },
 
     onSetGist : function (record) {
-        var panel = this.getView(),
-            files = record.data.files,
-            file, raw_url;
+        var panel = this.getView();
 
         panel.removeAll();
 
-        for (file in files) {
-            if (!files.hasOwnProperty(file)) { continue; }
+        GitHub.API.request({
+            api        : 'getGistById',
+            params     : [record.data.id],
+            callbackFn : function (scope, success, request) {
+                var gist = Ext.decode(request.responseText),
+                    files = gist.files;
 
-            raw_url = files[file].raw_url;
+                for (var file in files) {
+                    panel.add({
+                        xtype : 'panel',
+                        title : file,
+                        html  : '<pre>' + files[file].content + '</pre>'
+                    });
+                }
 
-            panel.add({
-                xtype : 'panel',
-                title : file,
-                html  : '<iframe src="' + raw_url + '" style="height: 100%; width: 100%;" />'
-            });
-        }
+                panel.setActiveItem(0);
+            }
+        });
     }
 });

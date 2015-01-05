@@ -3,7 +3,7 @@ Ext.define('GitHub.API', {
 
     requires : [
         'Ext.String',
-        'Ext.data.JsonP'
+        'Ext.Ajax'
     ],
 
     _api : {
@@ -39,7 +39,7 @@ Ext.define('GitHub.API', {
      *   - callbackFn {Function} A function to call upon completion of the asynchronous HTTP request
      */
     request : function (options) {
-        Ext.data.JsonP.request({
+        Ext.Ajax.request({
             url      : this.url(options.api, options.params),
             params   : options.extraParams,
             callback : options.callbackFn
